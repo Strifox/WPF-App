@@ -6,19 +6,35 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 
-namespace Monster.Login
+namespace Monster
 {
-    class Account
+    public class Account
     {
-        private string AccountName { get; set; }
-        private string Salt { get; set; }
-        private string PasswordHash { get; set; }
+        private string accountName { get; set; }
+        private string salt { get; set; }
+        private string passwordHash { get; set; }
+        
+        public string AccountName { get => accountName;}
+        public string PasswordHash { get => passwordHash; }
+        public string Salt { get => salt; }
 
         public Account(string accountName, string password)
         {
-            AccountName = accountName;
-            Salt = RandomString(new Random().Next(15, 40));
-            PasswordHash = ComputeSha256Hash(string.Concat(Salt, password));
+            this.accountName = accountName;
+            salt = RandomString(new Random().Next(15, 40));
+            passwordHash = ComputeSha256Hash(string.Concat(Salt, password));
+        }
+
+        public Account(string accountName, string password, string salt)
+        {
+            this.accountName = accountName;
+            this.salt = salt;
+            passwordHash = password;
+        }
+
+        public Account()
+        {
+
         }
 
         private static string RandomString(int length)
@@ -38,7 +54,7 @@ namespace Monster.Login
             }
             return builder.ToString();
         }
-        private static string ComputeSha256Hash(string rawData)
+        public static string ComputeSha256Hash(string rawData)
         {
             // Create a SHA256   
             using (SHA256 sha256Hash = SHA256.Create())

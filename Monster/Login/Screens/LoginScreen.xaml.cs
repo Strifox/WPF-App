@@ -23,6 +23,9 @@ namespace Monster
     {
         public LoginScreen()
         {
+            AccountContext context = new AccountContext();
+            context.Database.CreateIfNotExists();
+
             InitializeComponent();
         }
 
@@ -52,7 +55,7 @@ namespace Monster
                     }
 
                     string password = account.Salt + txtboxpassword.Password;
-                    string hashedPassword = Account.ComputeSha256Hash(password);
+                    string hashedPassword = Hashing.ComputeSha256Hash(password);
                     string getUser = $"SELECT COUNT(1) FROM tblUser WHERE Username={account.AccountName} AND PasswordHash={hashedPassword}";
                     SqlCommand sqlLogin = new SqlCommand(getUser, sqlCon);
                     int isUserValid = Convert.ToInt32(sqlLogin.ExecuteScalar());

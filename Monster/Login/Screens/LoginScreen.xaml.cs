@@ -23,6 +23,9 @@ namespace Monster
     {
         public LoginScreen()
         {
+            AccountContext context = new AccountContext();
+            context.Database.CreateIfNotExists();
+
             InitializeComponent();
         }
 
@@ -34,17 +37,34 @@ namespace Monster
                 if (sqlCon.State == ConnectionState.Closed)
                     sqlCon.Open();
 
-                string query = "SELECT COUNT(1) FROM tblUser WHERE Username=@Username AND Password=@Password";
-                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
+                string getUserQuery = "SELECT COUNT(1) FROM tblUser WHERE Username=@Username";
+                SqlCommand sqlCmd = new SqlCommand(getUserQuery, sqlCon);
+                var reader = sqlCmd.ExecuteReader();
+
                 sqlCmd.CommandType = CommandType.Text;
                 sqlCmd.Parameters.AddWithValue("@Username", txtboxusername.Text);
-                sqlCmd.Parameters.AddWithValue("@Password", txtboxpassword.Password);
+
                 int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
-                if(count == 1)
+                if (count == 1)
                 {
-                    MainWindow dashboard = new MainWindow();
-                    dashboard.Show();
-                    Close();
+                    Account account = new Account();
+
+                    while (reader.Read())
+                    {
+                        account = new Account(reader.GetString(1), reader.GetString(2), reader.GetString(3));
+                    }
+
+                    string password = account.Salt + txtboxpassword.Password;
+                    string hashedPassword = Hashing.ComputeSha256Hash(password);
+                    string getUser = $"SELECT COUNT(1) FROM tblUser WHERE Username={account.AccountName} AND PasswordHash={hashedPassword}";
+                    SqlCommand sqlLogin = new SqlCommand(getUser, sqlCon);
+                    int isUserValid = Convert.ToInt32(sqlLogin.ExecuteScalar());
+                    if (isUserValid == 1)
+                    {
+                        MainWindow dashboard = new MainWindow();
+                        dashboard.Show();
+                        Close();
+                    }
                 }
                 else
                 {
@@ -59,6 +79,13 @@ namespace Monster
             {
                 sqlCon.Close();
             }
+        }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterScreen registerScreen = new RegisterScreen();
+            registerScreen.Show();
+            Close();
         }
     }
 }

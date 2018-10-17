@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,9 +22,10 @@ namespace Monster
     /// </summary>
     public partial class LoginScreen : Window
     {
+        private AccountContext context = new AccountContext();
+
         public LoginScreen()
         {
-            AccountContext context = new AccountContext();
             context.Database.CreateIfNotExists();
 
             InitializeComponent();
@@ -31,54 +33,37 @@ namespace Monster
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            SqlConnection sqlCon = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=LoginDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             try
             {
-                if (sqlCon.State == ConnectionState.Closed)
-                    sqlCon.Open();
+                Account account = new Account();
 
-                string getUserQuery = "SELECT COUNT(1) FROM tblUser WHERE Username=@Username";
-                SqlCommand sqlCmd = new SqlCommand(getUserQuery, sqlCon);
-                var reader = sqlCmd.ExecuteReader();
-
-                sqlCmd.CommandType = CommandType.Text;
-                sqlCmd.Parameters.AddWithValue("@Username", txtboxusername.Text);
-
-                int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
-                if (count == 1)
+                if (Queries.DoesPlayerExistWithName(context, txtboxusername.Text))
                 {
-                    Account account = new Account();
+                    account = Queries.GetAccountByName(context, txtboxusername.Text);
 
-                    while (reader.Read())
-                    {
-                        account = new Account(reader.GetString(1), reader.GetString(2), reader.GetString(3));
-                    }
+                    string saltedPassword = string.Concat(account.Salt, txtboxpassword.Password);
+                    string hashedPassword = Hashing.ComputeSha256Hash(saltedPassword);
 
-                    string password = account.Salt + txtboxpassword.Password;
-                    string hashedPassword = Hashing.ComputeSha256Hash(password);
-                    string getUser = $"SELECT COUNT(1) FROM tblUser WHERE Username={account.AccountName} AND PasswordHash={hashedPassword}";
-                    SqlCommand sqlLogin = new SqlCommand(getUser, sqlCon);
-                    int isUserValid = Convert.ToInt32(sqlLogin.ExecuteScalar());
-                    if (isUserValid == 1)
+                    bool matchedPassword = string.Equals(account.PasswordHash, hashedPassword);
+
+                    if (matchedPassword)
                     {
                         MainWindow dashboard = new MainWindow();
                         dashboard.Show();
                         Close();
                     }
+                    else
+                        MessageBox.Show("Username or password is incorrect");
                 }
                 else
-                {
                     MessageBox.Show("Username or password is incorrect");
-                }
+
             }
             catch (Exception)
             {
                 throw;
             }
-            finally
-            {
-                sqlCon.Close();
-            }
+            
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)

@@ -5,32 +5,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
+using System.ComponentModel.DataAnnotations;
 
 namespace Monster
 {
     public class Account
     {
-        
-        private string id { get; set; }
-        private string accountName { get; set; }
+        private int id { get; set; }
+        private string username { get; set; }
         private string salt { get; set; }
         private string passwordHash { get; set; }
         
-        public string Id { get => id; set => value = id; }
-        public string AccountName { get => accountName;}
-        public string PasswordHash { get => passwordHash; }
-        public string Salt { get => salt; }
+        public int Id { get => id; set => value = id; }
+        public string Username { get => username; set => value = username; }
+        public string PasswordHash { get => passwordHash; set => value = passwordHash; }
+        public string Salt { get => salt; set => value = salt; }
 
-        public Account(string accountName, string password)
+        public Account(string userName, string password)
         {
-            this.accountName = accountName;
-            salt = Salting.RandomString(new Random().Next(15, 40));
-            passwordHash = Hashing.ComputeSha256Hash(string.Concat(Salt, password));
+            username = userName;
+            salt = Salting.RandomString(new Random().Next(10, 25));
+            passwordHash = Hashing.ComputeSha256Hash(string.Concat(salt, password));
         }
 
-        public Account(string accountName, string password, string salt)
+        public Account(string userName, string password, string salt)
         {
-            this.accountName = accountName;
+            username = userName;
             this.salt = salt;
             passwordHash = password;
         }

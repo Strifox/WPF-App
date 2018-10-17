@@ -21,6 +21,8 @@ namespace Monster
     /// </summary>
     public partial class RegisterScreen : Window
     {
+        private AccountContext accountContext = new AccountContext();
+
         public RegisterScreen()
         {
             InitializeComponent();
@@ -35,41 +37,22 @@ namespace Monster
         {
             Account account = new Account(txtboxusername.Text, txtboxpassword.Password);
 
-            SqlConnection sqlCon = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=LoginDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             try
             {
-                if (sqlCon.State == ConnectionState.Closed)
-                    sqlCon.Open();
+                if (!Queries.DoesPlayerExistWithName(accountContext, account.Username))
+                    accountContext.Accounts.Add(account);
+               
+                accountContext.SaveChanges();
+                LoginScreen loginScreen = new LoginScreen();
+                loginScreen.Show();
+                Close();
 
-                string checkDatabaseQuery = $"SELECT COUNT(1) FROM tblUser WHERE Username={account.AccountName}";
-                SqlCommand sqlComm = new SqlCommand(checkDatabaseQuery, sqlCon);
-                sqlComm.CommandType = CommandType.Text;
-                int count = Convert.ToInt32(sqlComm.ExecuteScalar());
-                if (count == 0)
-                {
-                    string query = $"INSERT INTO tblUser [(Username, PasswordHash, Salt)] VALUES [({account.AccountName}, {account.PasswordHash}, {account.Salt})]";
-                    SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
-                    sqlCmd.CommandType = CommandType.Text;
-
-                    LoginScreen loginScreen = new LoginScreen();
-                    loginScreen.Show();
-                    Close();
-                }
-                else
-                {
-                    MessageBox.Show("Username already exists");
-                }
-              
-              
             }
             catch (Exception)
             {
                 throw;
             }
-            finally
-            {
-                sqlCon.Close();
-            }
+           
         }
     }
 }

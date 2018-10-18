@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Monster
 {
@@ -11,12 +12,12 @@ namespace Monster
         public static bool DoesPlayerExistWithName(AccountContext context, string name)
         {
             var accounts = from account in context.Accounts
-                          select account;
+                           select account;
 
             foreach (var user in accounts)
             {
                 if (user.Username == name)
-                    return true;
+                return true;
             }
             return false;
         }

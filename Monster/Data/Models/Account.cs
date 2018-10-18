@@ -16,7 +16,6 @@ namespace Monster
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public string Salt { get; set; }
-        public string AccessToken { get; set; }
 
         public Account(string userName, string password)
         {

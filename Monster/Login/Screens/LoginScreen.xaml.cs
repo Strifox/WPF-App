@@ -23,6 +23,7 @@ namespace Monster
     public partial class LoginScreen : Window
     {
         private AccountContext context = new AccountContext();
+        private ApiOperations operations = new ApiOperations();
 
         public LoginScreen()
         {
@@ -33,37 +34,8 @@ namespace Monster
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                Account account = new Account();
-
-                if (Queries.DoesPlayerExistWithName(context, txtboxusername.Text))
-                {
-                    account = Queries.GetAccountByName(context, txtboxusername.Text);
-
-                    string saltedPassword = string.Concat(account.Salt, txtboxpassword.Password);
-                    string hashedPassword = Hashing.ComputeSha256Hash(saltedPassword);
-
-                    bool matchedPassword = string.Equals(account.PasswordHash, hashedPassword);
-
-                    if (matchedPassword)
-                    {
-                        MainWindow dashboard = new MainWindow();
-                        dashboard.Show();
-                        Close();
-                    }
-                    else
-                        MessageBox.Show("Username or password is incorrect");
-                }
-                else
-                    MessageBox.Show("Username or password is incorrect");
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            
+            operations.AuthenticateUser(txtboxusername.Text, txtboxpassword.Password);
+            Close();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)

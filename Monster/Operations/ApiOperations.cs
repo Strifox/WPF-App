@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Monster.Login.Pages;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace Monster
@@ -13,6 +15,7 @@ namespace Monster
     class ApiOperations
     {
         private AccountContext context = new AccountContext();
+        
 
         private string baseUrl;
 
@@ -38,10 +41,8 @@ namespace Monster
 
                     if (matchedPassword)
                     {
-                        MainWindow dashboard = new MainWindow();
-                        dashboard.Show();
-
                         Globals.LoggedInUser = account;
+                        NavigationService.Navigate(new DetailsPage());
                     }
                     else
                         MessageBox.Show("Username or password is incorrect");
@@ -78,7 +79,7 @@ namespace Monster
 
         public Account GetUserDetails(Account user)
         {
-            string endpoint = baseUrl + "/users/" + user.Id;
+            string endpoint = baseUrl + "/users/" + user.Id; 
             string access_token = user.AccessToken;
 
             WebClient wc = new WebClient();
@@ -109,12 +110,9 @@ namespace Monster
                     context.SaveChanges();
 
                     MessageBox.Show("Registration successful");
-
-                    LoginScreen loginScreen = new LoginScreen();
-                    loginScreen.Show();
-
                     Globals.LoggedInUser = account;
 
+                    NavigationService ns = NavigationService.GetNavigationService(new LoginPage());
                 }
                 else
                     MessageBox.Show("Username already exists");

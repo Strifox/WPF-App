@@ -65,11 +65,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Login\Screens\LoginScreen.xaml">
+    <Page Include="Login\Pages\DetailsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login\Screens\RegisterScreen.xaml">
+    <Page Include="Login\Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login\Pages\RegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -83,19 +87,22 @@
     </Compile>
     <Compile Include="Data\AccountContext.cs" />
     <Compile Include="Data\Models\Globals.cs" />
+    <Compile Include="Login\Pages\DetailsPage.xaml.cs">
+      <DependentUpon>DetailsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login\Pages\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201810180957433_addedAccessToken.cs" />
     <Compile Include="Migrations\201810180957433_addedAccessToken.Designer.cs">
       <DependentUpon>201810180957433_addedAccessToken.cs</DependentUpon>
     </Compile>
     <Compile Include="Operations\Queries.cs" />
     <Compile Include="Login\Hashing.cs" />
-    <Compile Include="Login\Screens\LoginScreen.xaml.cs">
-      <DependentUpon>LoginScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Data\Models\Account.cs" />
-    <Compile Include="Login\Screens\RegisterScreen.xaml.cs">
-      <DependentUpon>RegisterScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Login\Salting.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

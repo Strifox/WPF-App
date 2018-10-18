@@ -16,6 +16,7 @@ namespace Monster
         public string Username { get; set; }
         public string PasswordHash { get; set; }
         public string Salt { get; set; }
+        public string AccessToken { get; set; }
 
         public Account(string userName, string password)
         {
@@ -23,6 +24,8 @@ namespace Monster
             Salt = Salting.RandomString(new Random().Next(10, 25));
             PasswordHash = Hashing.ComputeSha256Hash(string.Concat(Salt, password));
         }
+
+
 
         public Account()
         {

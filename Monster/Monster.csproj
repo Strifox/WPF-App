@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -79,12 +82,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\AccountContext.cs" />
-    <Compile Include="Data\Queries.cs" />
+    <Compile Include="Data\Models\Globals.cs" />
+    <Compile Include="Migrations\201810180957433_addedAccessToken.cs" />
+    <Compile Include="Migrations\201810180957433_addedAccessToken.Designer.cs">
+      <DependentUpon>201810180957433_addedAccessToken.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operations\Queries.cs" />
     <Compile Include="Login\Hashing.cs" />
     <Compile Include="Login\Screens\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Login\Account.cs" />
+    <Compile Include="Data\Models\Account.cs" />
     <Compile Include="Login\Screens\RegisterScreen.xaml.cs">
       <DependentUpon>RegisterScreen.xaml</DependentUpon>
     </Compile>
@@ -116,6 +124,7 @@
       <DependentUpon>201810171328556_newIdAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Operations\ApiOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -143,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810171328556_newIdAdded.resx">
       <DependentUpon>201810171328556_newIdAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810180957433_addedAccessToken.resx">
+      <DependentUpon>201810180957433_addedAccessToken.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

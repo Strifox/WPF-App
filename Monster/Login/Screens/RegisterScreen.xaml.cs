@@ -21,7 +21,8 @@ namespace Monster
     /// </summary>
     public partial class RegisterScreen : Window
     {
-        private AccountContext accountContext = new AccountContext();
+        private AccountContext context = new AccountContext();
+        private ApiOperations operations = new ApiOperations();
 
         public RegisterScreen()
         {
@@ -30,34 +31,15 @@ namespace Monster
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+            Close();
         }
 
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
-            Account account = new Account(txtboxusername.Text, txtboxpassword.Password);
-
-            try
-            {
-                if (!Queries.DoesPlayerExistWithName(accountContext, account.Username))
-                {
-                    accountContext.Accounts.Add(account);
-                    accountContext.SaveChanges();
-                    LoginScreen loginScreen = new LoginScreen();
-                    loginScreen.Show();
-                    Close();
-                }
-                else
-                    MessageBox.Show("Username already exists");
-               
-                
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-           
+            operations.RegisterUser(txtboxusername.Text, txtboxpassword.Password);
+            Close();
         }
     }
 }

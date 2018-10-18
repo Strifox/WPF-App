@@ -40,12 +40,17 @@ namespace Monster
             try
             {
                 if (!Queries.DoesPlayerExistWithName(accountContext, account.Username))
+                {
                     accountContext.Accounts.Add(account);
+                    accountContext.SaveChanges();
+                    LoginScreen loginScreen = new LoginScreen();
+                    loginScreen.Show();
+                    Close();
+                }
+                else
+                    MessageBox.Show("Username already exists");
                
-                accountContext.SaveChanges();
-                LoginScreen loginScreen = new LoginScreen();
-                loginScreen.Show();
-                Close();
+                
 
             }
             catch (Exception)

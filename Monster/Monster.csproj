@@ -79,6 +79,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\AccountContext.cs" />
+    <Compile Include="Data\Queries.cs" />
     <Compile Include="Login\Hashing.cs" />
     <Compile Include="Login\Screens\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
@@ -98,6 +99,22 @@
     <Compile Include="Migrations\201810171149333_Init.Designer.cs">
       <DependentUpon>201810171149333_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810171215349_addedColumns.cs" />
+    <Compile Include="Migrations\201810171215349_addedColumns.Designer.cs">
+      <DependentUpon>201810171215349_addedColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810171218397_changedColumn.cs" />
+    <Compile Include="Migrations\201810171218397_changedColumn.Designer.cs">
+      <DependentUpon>201810171218397_changedColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810171226099_ChangedPKey.cs" />
+    <Compile Include="Migrations\201810171226099_ChangedPKey.Designer.cs">
+      <DependentUpon>201810171226099_ChangedPKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810171328556_newIdAdded.cs" />
+    <Compile Include="Migrations\201810171328556_newIdAdded.Designer.cs">
+      <DependentUpon>201810171328556_newIdAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -114,6 +131,18 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201810171149333_Init.resx">
       <DependentUpon>201810171149333_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810171215349_addedColumns.resx">
+      <DependentUpon>201810171215349_addedColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810171218397_changedColumn.resx">
+      <DependentUpon>201810171218397_changedColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810171226099_ChangedPKey.resx">
+      <DependentUpon>201810171226099_ChangedPKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810171328556_newIdAdded.resx">
+      <DependentUpon>201810171328556_newIdAdded.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

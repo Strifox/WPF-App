@@ -10,6 +10,7 @@ namespace Monster.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "Monster.AccountContext";
         }
 
         protected override void Seed(Monster.AccountContext context)

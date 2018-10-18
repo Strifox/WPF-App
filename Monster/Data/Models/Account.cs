@@ -24,6 +24,8 @@ namespace Monster
             PasswordHash = Hashing.ComputeSha256Hash(string.Concat(Salt, password));
         }
 
+
+
         public Account()
         {
 

@@ -28,19 +28,21 @@ namespace Monster.Login.Pages
             context.Database.CreateIfNotExists();
             InitializeComponent();
         }
-       
+
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
             Account user = operations.AuthenticateUser(txtboxusername.Text, txtboxpassword.Password);
-            if (user == null)
+            if (user.Username == null)
             {
                 MessageBox.Show("Invalid username or password");
                 return;
             }
-
-            Globals.LoggedInUser = user;
-            MessageBox.Show("Login successful");
-            NavigationService.Navigate(new DetailsPage());
+            else
+            {
+                Globals.LoggedInUser = user;
+                MessageBox.Show("Login successful");
+                NavigationService.Navigate(new DetailsPage());
+            }
         }
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)

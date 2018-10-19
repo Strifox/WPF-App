@@ -21,21 +21,30 @@ namespace Monster.Login.Pages
     public partial class RegisterPage : Page
     {
         private AccountContext context = new AccountContext();
-        private ApiOperations operations = new ApiOperations();
+        private Operations operations = new Operations();
 
         public RegisterPage()
         {
             InitializeComponent();
         }
-   
-        private void btnBack_Click(object sender, RoutedEventArgs e)
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new LoginPage());
+            NavigationService.GoBack();
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            operations.RegisterUser(txtboxusername.Text, txtboxpassword.Password);
+            Account user = operations.RegisterUser(txtboxusername.Text, txtboxpassword.Password);
+            if (user == null)
+            {
+                MessageBox.Show("Username already exists");
+                return;
+            }
+
+            Globals.LoggedInUser = user;
+            NavigationService.Navigate(new LoginPage());
         }
     }
 }
+

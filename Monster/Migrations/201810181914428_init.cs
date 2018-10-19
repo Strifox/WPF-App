@@ -3,16 +3,16 @@ namespace Monster.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addedAccessToken : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Users", "AccessToken", c => c.String());
+            DropColumn("dbo.Users", "AccessToken");
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Users", "AccessToken");
+            AddColumn("dbo.Users", "AccessToken", c => c.String());
         }
     }
 }

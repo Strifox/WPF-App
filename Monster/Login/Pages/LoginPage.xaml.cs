@@ -20,29 +20,32 @@ namespace Monster.Login.Pages
     /// </summary>
     public partial class LoginPage : Page
     {
-
         private AccountContext context = new AccountContext();
-        private ApiOperations operations = new ApiOperations();
-
+        private Operations operations = new Operations();
 
         public LoginPage()
         {
             context.Database.CreateIfNotExists();
-
             InitializeComponent();
         }
-
-
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+       
+        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            operations.AuthenticateUser(txtboxusername.Text, txtboxpassword.Password);
+            Account user = operations.AuthenticateUser(txtboxusername.Text, txtboxpassword.Password);
+            if (user == null)
+            {
+                MessageBox.Show("Invalid username or password");
+                return;
+            }
 
+            Globals.LoggedInUser = user;
+            MessageBox.Show("Login successful");
+            NavigationService.Navigate(new DetailsPage());
         }
 
-        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RegisterPage());
-
         }
     }
 }

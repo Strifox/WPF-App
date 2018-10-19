@@ -20,39 +20,37 @@ namespace Monster.Login.Pages
     /// </summary>
     public partial class DetailsPage : Page
     {
-
         public DetailsPage()
         {
             InitializeComponent();
         }
-
         /**
-         * Details Page Loaded
-         * @param  object  sender
-         * @param  RoutedEventArgs e
-         */
-        private void detailsPage_Loaded(object sender, RoutedEventArgs e)
+        * Details Page Loaded
+        * @param  object  sender
+        * @param  RoutedEventArgs e
+        */
+        private void DetailsPage_Loaded(object sender, RoutedEventArgs e)
         {
-            FetchUserDetails();
+            
             ShowUserInfo();
         }
 
         /**
          * Fetch User Details
          */
-        private void FetchUserDetails()
-        {
-            ApiOperations ops = new ApiOperations();
-            Account user = ops.GetUserDetails(Globals.LoggedInUser);
-            if (user == null)
-            {
-                MessageBox.Show("Session expired");
-                // Navigate back to login page
-                NavigationService.Navigate(new LoginPage());
-            }
+        //private void FetchUserDetails()
+        //{
+        //    ApiOperations ops = new ApiOperations();
+        //    Account user = ops.GetUserDetails(Globals.LoggedInUser);
+        //    if (user == null)
+        //    {
+        //        MessageBox.Show("Session expired");
+        //        // Navigate back to login page
+        //        NavigationService.Navigate(new LoginPage());
+        //    }
 
-            Globals.LoggedInUser = user;
-        }
+        //    Globals.LoggedInUser = user;
+        //}
 
         /**
          * Show User Info on the Screen
@@ -60,6 +58,7 @@ namespace Monster.Login.Pages
         private void ShowUserInfo()
         {
             tbkWelcome.Text += " " + Globals.LoggedInUser.Username;
+          
         }
 
         /**
@@ -67,11 +66,11 @@ namespace Monster.Login.Pages
          * @param  object sender
          * @param  RoutedEventArgs e
          */
-        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
             Globals.LoggedInUser = null;
             NavigationService.Navigate(new LoginPage());
         }
     }
 }
-
+ 

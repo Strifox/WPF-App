@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 
 namespace Monster
@@ -92,6 +93,36 @@ namespace Monster
                 throw;
             }
             return account;
+        }
+
+        public void CheckTextBox(TextBox textBox,TextBlock textBlock )
+        {
+            RegisterPage page = new RegisterPage();
+            if (string.IsNullOrEmpty(textBox.Text) || string.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBlock.Text = "required";
+                textBlock.Margin = new Thickness(Convert.ToDouble(1), Convert.ToDouble(5), Convert.ToDouble(0), Convert.ToDouble(0));
+            }
+            else
+            {
+                textBlock.Text = "*";
+                textBlock.Margin = new Thickness(Convert.ToDouble(1), Convert.ToDouble(-5), Convert.ToDouble(0), Convert.ToDouble(0));
+            }
+        }
+
+        public void CheckPasswordBox(PasswordBox passwordBox, TextBlock textBlock)
+        {
+            RegisterPage page = new RegisterPage();
+            if (string.IsNullOrEmpty(passwordBox.Password) || string.IsNullOrWhiteSpace(passwordBox.Password))
+            {
+                textBlock.Text = "required";
+                textBlock.Margin = new Thickness(Convert.ToDouble(1), Convert.ToDouble(5), Convert.ToDouble(0), Convert.ToDouble(0));
+            }
+            else
+            {
+                textBlock.Text = "*";
+                textBlock.Margin = new Thickness(Convert.ToDouble(1), Convert.ToDouble(-5), Convert.ToDouble(0), Convert.ToDouble(0));
+            }
         }
 
     }

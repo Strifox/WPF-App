@@ -36,14 +36,17 @@ namespace Monster.Login.Pages
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             Account user = operations.RegisterUser(txtboxusername.Text, txtboxpassword.Password);
-            if (user == null)
+            if (user != null)
             {
                 MessageBox.Show("Username already exists");
                 return;
             }
+            else
+            {
+                Globals.LoggedInUser = user;
+                NavigationService.Navigate(new LoginPage());
+            }
 
-            Globals.LoggedInUser = user;
-            NavigationService.Navigate(new LoginPage());
         }
     }
 }

@@ -4,17 +4,18 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-       Title="Login" Height="400" Width="300" Background="AntiqueWhite">
-    <Border Background="Black" CornerRadius="20" Margin="20">
-        <StackPanel Margin="20">
-            <Label x:Name="labellogin" Content="Login" Foreground="White" HorizontalAlignment="Center" FontSize="20" FontFamily="Verdana" Margin="20"/>
-            <Label x:Name="labelusername" Content="Username" Foreground="White" HorizontalAlignment="Center" FontFamily="Verdana"/>
-            <TextBox x:Name="txtboxusername" Background="#FF46494D" Height="23" HorizontalContentAlignment="Center" TextWrapping="Wrap" FontFamily="Verdana" FontSize="18"/>
-            <Label x:Name="labelpassword" Content="Password" Foreground="White" HorizontalAlignment="Center" FontFamily="Verdana"/>
-            <PasswordBox x:Name="txtboxpassword" Background="#FF46494D" Height="23" HorizontalContentAlignment="Center" FontFamily="Verdana" FontSize="18"/>
-            <Button x:Name="btnSubmit" Click="BtnSubmit_Click" Background="#FFB8C2CF" Content="Login" Margin="60 20"/>
-            <Button x:Name="btnRegister" Click="BtnRegister_Click" Background="#FFB8C2CF" Content="Register" Margin="60 -10"/>
+          d:DesignHeight="485" d:DesignWidth="715"
+      Title="Login">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="auto">
+            <TextBlock Text="Welcome to Monster" HorizontalAlignment="Center" FontSize="36" />
+            <TextBlock Text="Username:" Margin="0,5,0,0" />
+            <TextBox x:Name="txtboxusername" Padding="5" />
+            <TextBlock Text="Password:" Margin="0,5,0,0" />
+            <PasswordBox x:Name="txtboxpassword" Padding="5" />
+            <Button x:Name="BtnSubmit" Content="LOGIN" Padding="5" Margin="0,5,0,0" Click="BtnSubmit_Click" />
+            <Button x:Name="BtnRegister" Content="REGISTER" Padding="5" Margin="0,5,0,0" Click="BtnRegister_Click" />
         </StackPanel>
-    </Border>
+    </Grid>
 </Page>

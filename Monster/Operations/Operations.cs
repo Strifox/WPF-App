@@ -14,13 +14,10 @@ namespace Monster
     class Operations
     {
         private AccountContext context = new AccountContext();
-       // private LoginPage navigation = new LoginPage();
-
-        private readonly string baseUrl;
 
         public Operations()
         {
-            baseUrl = "http://localhost:5000/api";
+
         }
 
         public Account AuthenticateUser(string username, string password)
@@ -41,12 +38,7 @@ namespace Monster
                     {
                         Globals.LoggedInUser = account;
                     }
-                    else
-                        MessageBox.Show("Username or password is incorrect");
                 }
-                else
-                    MessageBox.Show("Username or password is incorrect");
-
             }
             catch (Exception)
             {

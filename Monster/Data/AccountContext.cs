@@ -23,6 +23,9 @@ namespace Monster
             accountBuilder.Property(x => x.Username).IsRequired();
             accountBuilder.Property(x => x.PasswordHash).IsRequired();
             accountBuilder.Property(x => x.Salt).IsRequired();
+            accountBuilder.Property(x => x.Firstname).IsOptional();
+            accountBuilder.Property(x => x.Lastname).IsOptional();
+            accountBuilder.Property(x => x.Age).IsOptional();
         }
     }
 }

@@ -35,16 +35,51 @@ namespace Monster.Login.Pages
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            Account user = operations.RegisterUser(txtboxusername.Text, txtboxpassword.Password);
-            if (user != null)
+            if (string.IsNullOrEmpty(txtboxfirstname.Text) || string.IsNullOrWhiteSpace(txtboxfirstname.Text))
+                txtblockfirstnameisrequired.Visibility = Visibility.Visible;
+            else
+                txtblockfirstnameisrequired.Visibility = Visibility.Hidden;
+
+            if (string.IsNullOrEmpty(txtboxlastname.Text) || string.IsNullOrWhiteSpace(txtboxlastname.Text))
+                txtblocklastnameisrequired.Visibility = Visibility.Visible;
+            else
+                txtblocklastnameisrequired.Visibility = Visibility.Hidden;
+
+            if (string.IsNullOrEmpty(txtboxusername.Text) || string.IsNullOrWhiteSpace(txtboxusername.Text))
+                txtblockusernameisrequired.Visibility = Visibility.Visible;
+            else
+                txtblockusernameisrequired.Visibility = Visibility.Hidden;
+
+            if (string.IsNullOrEmpty(txtboxpassword.Password) || string.IsNullOrWhiteSpace(txtboxpassword.Password))
+                txtblockpasswordisrequired.Visibility = Visibility.Visible;
+            else
+                txtblockpasswordisrequired.Visibility = Visibility.Hidden;
+
+            if (string.IsNullOrEmpty(txtboxage.Text) || string.IsNullOrWhiteSpace(txtboxage.Text))
             {
-                MessageBox.Show("Username already exists");
-                return;
+                if (string.IsNullOrEmpty(txtboxusername.Text) || string.IsNullOrWhiteSpace(txtboxusername.Text) || string.IsNullOrEmpty(txtboxpassword.Password) || string.IsNullOrWhiteSpace(txtboxpassword.Password) || string.IsNullOrEmpty(txtboxfirstname.Text) || string.IsNullOrWhiteSpace(txtboxfirstname.Text) || string.IsNullOrEmpty(txtboxlastname.Text) || string.IsNullOrWhiteSpace(txtboxlastname.Text))
+                {
+                    return;
+                }
+                else
+                {
+                    Account user = operations.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text);
+                    Globals.LoggedInUser = user;
+                    NavigationService.Navigate(new LoginPage());
+                }
             }
             else
             {
-                Globals.LoggedInUser = user;
-                NavigationService.Navigate(new LoginPage());
+                if (string.IsNullOrEmpty(txtboxusername.Text) || string.IsNullOrWhiteSpace(txtboxusername.Text) || string.IsNullOrEmpty(txtboxpassword.Password) || string.IsNullOrWhiteSpace(txtboxpassword.Password) || string.IsNullOrEmpty(txtboxfirstname.Text) || string.IsNullOrWhiteSpace(txtboxfirstname.Text) || string.IsNullOrEmpty(txtboxlastname.Text) || string.IsNullOrWhiteSpace(txtboxlastname.Text))
+                {
+                    return;
+                }
+                else
+                {
+                    Account user = operations.RegisterUserAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text));
+                    Globals.LoggedInUser = user;
+                    NavigationService.Navigate(new LoginPage());
+                }
             }
 
         }

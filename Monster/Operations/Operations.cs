@@ -39,6 +39,8 @@ namespace Monster
                         Globals.LoggedInUser = account;
                     }
                 }
+                else
+                    MessageBox.Show("Username already exists");
             }
             catch (Exception)
             {
@@ -48,9 +50,9 @@ namespace Monster
         }
 
 
-        public Account RegisterUser(string username, string password)
+        public Account RegisterUserWithoutAge(string username, string password, string firstname, string lastname)
         {
-            Account account = new Account(username, password);
+            Account account = new Account(username, password, firstname, lastname);
             try
             {
                 if (!Queries.DoesPlayerExistWithName(context, account.Username))
@@ -60,10 +62,30 @@ namespace Monster
 
                     Globals.LoggedInUser = account;
                     MessageBox.Show("Registration successful");
-
                 }
                 else
                     MessageBox.Show("Username already exists");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return account;
+        }
+
+        public Account RegisterUserAge(string username, string password, string firstname, string lastname, int age)
+        {
+            Account account = new Account(username, password, firstname, lastname, age);
+            try
+            {
+                if (!Queries.DoesPlayerExistWithName(context, account.Username))
+                {
+                    context.Accounts.Add(account);
+                    context.SaveChanges();
+
+                    Globals.LoggedInUser = account;
+                    MessageBox.Show("Registration successful");
+                }
             }
             catch (Exception)
             {

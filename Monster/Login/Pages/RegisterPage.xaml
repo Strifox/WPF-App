@@ -11,22 +11,23 @@
             <TextBlock Text="Create Account" HorizontalAlignment="Left" FontSize="36" />
             <TextBlock Text="Username:" Margin="0,5,0,0" />
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                <TextBox x:Name="txtboxusername" Padding="5" Width="300" TextChanged="Txtboxusername_TextChanged" />
+                <TextBox x:Name="txtboxusername" Padding="5" Width="300" TextChanged="Txtbox_TextChanged" />
                 <TextBlock x:Name="txtblockusernameisrequired" Text="*" Foreground="Red" HorizontalAlignment="Right" Margin="1,-5,0,0"  />
             </StackPanel>
             <TextBlock Text="Password:" Margin="0,5,0,0" />
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                <PasswordBox x:Name="txtboxpassword" Padding="5" Width="300" />
+                <PasswordBox x:Name="txtboxpassword"
+                             PasswordChanged="password_PasswordChanged" Padding="5" Width="300" />
                 <TextBlock x:Name="txtblockpasswordisrequired" Text="*" Foreground="Red"  HorizontalAlignment="Right" Margin="1,-5,0,0" />
             </StackPanel>
             <TextBlock Text="Firstname:" Margin="0,5,0,0" />
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                <TextBox x:Name="txtboxfirstname" Padding="5"  Width="300" />
+                <TextBox x:Name="txtboxfirstname" Padding="5"  Width="300" TextChanged="Txtbox_TextChanged" />
                 <TextBlock x:Name="txtblockfirstnameisrequired" Text="*" Foreground="Red" HorizontalAlignment="Right" Margin="1,-5,0,0"  />
             </StackPanel>
             <TextBlock Text="Lastname:" Margin="0,5,0,0" />
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                <TextBox x:Name="txtboxlastname" Padding="5"  Width="300" />
+                <TextBox x:Name="txtboxlastname" Padding="5"  Width="300" TextChanged="Txtbox_TextChanged" />
                 <TextBlock x:Name="txtblocklastnameisrequired" Text="*" Foreground="Red"  HorizontalAlignment="Right" Margin="1,-5,0,0" />
             </StackPanel>
             <TextBlock Text="Age:" Margin="0,5,0,0" />
@@ -36,6 +37,7 @@
             <Button x:Name="BtnRegister" HorizontalAlignment="Left" Content="REGISTER" Padding="5" Margin="0,5,0,0" Width="300"  Click="BtnRegister_Click" IsEnabled="False" />
             <Button x:Name="BtnBack" HorizontalAlignment="Left" Content="BACK" Padding="5" Margin="0,5,0,0" Width="300" Click="BtnBack_Click" />
             <TextBlock x:Name="txtblockisrequired" Text="* is required" Visibility="Hidden" HorizontalAlignment="Right" Foreground="Red" Margin="0,0,0,0" />
+
         </StackPanel>
     </Grid>
 </Page>

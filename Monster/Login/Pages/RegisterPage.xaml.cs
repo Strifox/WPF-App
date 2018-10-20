@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,8 @@ namespace Monster.Login.Pages
             operations.CheckTextBox(txtboxfirstname, txtblockfirstnameisrequired);
             operations.CheckTextBox(txtboxlastname, txtblocklastnameisrequired);
 
+        
+
             if (string.IsNullOrEmpty(txtboxage.Text) || string.IsNullOrWhiteSpace(txtboxage.Text))
             {
                 if (string.IsNullOrEmpty(txtboxusername.Text) || string.IsNullOrWhiteSpace(txtboxusername.Text) || string.IsNullOrEmpty(txtboxpassword.Password) || string.IsNullOrWhiteSpace(txtboxpassword.Password) || string.IsNullOrEmpty(txtboxfirstname.Text) || string.IsNullOrWhiteSpace(txtboxfirstname.Text) || string.IsNullOrEmpty(txtboxlastname.Text) || string.IsNullOrWhiteSpace(txtboxlastname.Text))
@@ -49,6 +52,7 @@ namespace Monster.Login.Pages
                 }
                 else
                 {
+                   
                     Account user = operations.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text);
                     Globals.LoggedInUser = user;
                     NavigationService.Navigate(new LoginPage());
@@ -63,20 +67,22 @@ namespace Monster.Login.Pages
                 }
                 else
                 {
-                    Account user = operations.RegisterUserAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text));
+                    Account user = operations.RegisterUserWithAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text));
                     Globals.LoggedInUser = user;
                     NavigationService.Navigate(new LoginPage());
                 }
             }
-
+           
         }
 
-        private void txtboxusername_TextChanged(object sender, TextChangedEventArgs e)
+        private void Txtboxusername_TextChanged(object sender, TextChangedEventArgs e)
         {
+            BtnRegister.IsEnabled = txtboxusername.Text.Length > 0;
             if (string.IsNullOrEmpty(txtboxusername.Text) || string.IsNullOrWhiteSpace(txtboxusername.Text))
                 txtblockusernameisrequired.Text = "*";
 
         }
     }
+
 }
 

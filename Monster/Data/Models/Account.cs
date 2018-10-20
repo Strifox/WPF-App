@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 using System.ComponentModel.DataAnnotations;
+using System.Windows;
 
 namespace Monster
 {
@@ -20,13 +21,16 @@ namespace Monster
         public string Lastname { get; set; }
         public int Age { get; set; }
 
-      
+
         public Account(string userName, string password, string firstname, string lastname)
         {
             Username = userName;
             Firstname = firstname;
             Lastname = lastname;
-            Salt = Salting.RandomString(new Random().Next(10, 25));
+            if (!string.IsNullOrWhiteSpace(password))
+                Salt = Salting.RandomString(new Random().Next(10, 25));
+            else
+                MessageBox.Show("Cannot use whitespace");
             PasswordHash = Hashing.ComputeSha256Hash(string.Concat(Salt, password));
         }
 
@@ -36,7 +40,10 @@ namespace Monster
             Firstname = firstname;
             Lastname = lastname;
             Age = age;
-            Salt = Salting.RandomString(new Random().Next(10, 25));
+            if (!string.IsNullOrWhiteSpace(password))
+                Salt = Salting.RandomString(new Random().Next(10, 25));
+            else
+                MessageBox.Show("Cannot use whitespace");
             PasswordHash = Hashing.ComputeSha256Hash(string.Concat(Salt, password));
         }
 

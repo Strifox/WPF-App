@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,18 +32,15 @@ namespace Monster.Login.Pages
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            Account user = operations.AuthenticateUser(txtboxusername.Text, txtboxpassword.Password);
-            if (user.Username == null)
+            operations.AuthenticateUser(txtboxusername.Text, txtboxpassword.Password);
+
+            if (Globals.LoggedInUser == null)
             {
-                MessageBox.Show("Invalid username or password");
+                txtblockinvalidusernameorpassword.Text = "Invalid username or password";
                 return;
             }
-            else
-            {
-                Globals.LoggedInUser = user;
-                MessageBox.Show("Login successful");
-                NavigationService.Navigate(new DetailsPage());
-            }
+            txtblockinvalidusernameorpassword.Text = "Login successful";
+            NavigationService.Navigate(new DetailsPage());
         }
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)

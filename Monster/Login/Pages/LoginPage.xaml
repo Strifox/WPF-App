@@ -16,6 +16,7 @@
             <PasswordBox x:Name="txtboxpassword" Padding="5" />
             <Button x:Name="BtnSubmit" Content="LOGIN" Padding="5" Margin="0,5,0,0" Click="BtnSubmit_Click" />
             <Button x:Name="BtnRegister" Content="REGISTER" Padding="5" Margin="0,5,0,0" Click="BtnRegister_Click" />
+            <TextBlock x:Name="txtblockinvalidusernameorpassword" Text="" HorizontalAlignment="Left" Foreground="Red" Margin="0,0,0,0" />
         </StackPanel>
     </Grid>
 </Page>

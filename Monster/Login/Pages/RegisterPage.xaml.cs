@@ -38,46 +38,26 @@ namespace Monster.Login.Pages
         {
             if (string.IsNullOrEmpty(txtboxage.Text) || string.IsNullOrWhiteSpace(txtboxage.Text))
             {
-                if (Globals.LoggedInUser != null)
+                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
                 {
-                    if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
-                    {
-                        Account user = operations.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text);
-                        Globals.LoggedInUser = user;
+                    Account user = operations.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, txtblockstatus);
+                    if (user != null)
                         NavigationService.Navigate(new LoginPage());
-                    }
-                    else
-                    {
-                        txtblockuserexists.Text = "Username exists";
-                        return;
-                    }
                 }
                 else
-                {
-                    txtblockuserexists.Text = "Username exists";
                     return;
-                }
             }
             else
             {
-                if (Globals.LoggedInUser != null)
+                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
                 {
-                    if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
-                    {
-                        Account user = operations.RegisterUserWithAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text));
-                        Globals.LoggedInUser = user;
+                    Account user = operations.RegisterUserWithAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text), txtblockstatus);
+
+                    if (user != null)
                         NavigationService.Navigate(new LoginPage());
-                    }
-                    {
-                        txtblockuserexists.Text = "Username exists";
-                        return;
-                    }
                 }
                 else
-                {
-                    txtblockuserexists.Text = "Username exists";
                     return;
-                }
             }
         }
 

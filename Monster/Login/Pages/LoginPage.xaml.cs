@@ -34,7 +34,7 @@ namespace Monster.Login.Pages
         {
             operations.AuthenticateUser(txtboxusername.Text, txtboxpassword.Password);
 
-            if (Globals.LoggedInUser == null)
+            if (Globals.User == null)
             {
                 txtblockinvalidusernameorpassword.Visibility = Visibility.Visible;
                 return;

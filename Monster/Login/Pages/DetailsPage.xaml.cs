@@ -40,7 +40,7 @@ namespace Monster.Login.Pages
          */
         private void ShowUserInfo()
         {
-            txtboxWelcome.Text += " " + Globals.LoggedInUser.Firstname;
+            txtboxWelcome.Text += " " + Globals.User.Firstname;
         }
 
         /**
@@ -50,7 +50,7 @@ namespace Monster.Login.Pages
          */
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
-            Globals.LoggedInUser = null;
+            Globals.User = null;
             NavigationService.Navigate(new LoginPage());
         }
     }

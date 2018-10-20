@@ -36,64 +36,57 @@ namespace Monster.Login.Pages
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            operations.CheckTextBox(txtboxusername, txtblockusernameisrequired);
-            operations.CheckPasswordBox(txtboxpassword, txtblockpasswordisrequired);
-            operations.CheckTextBox(txtboxfirstname, txtblockfirstnameisrequired);
-            operations.CheckTextBox(txtboxlastname, txtblocklastnameisrequired);
-
             if (string.IsNullOrEmpty(txtboxage.Text) || string.IsNullOrWhiteSpace(txtboxage.Text))
             {
-                if (string.IsNullOrEmpty(txtboxusername.Text) || string.IsNullOrWhiteSpace(txtboxusername.Text) || string.IsNullOrEmpty(txtboxpassword.Password) || string.IsNullOrWhiteSpace(txtboxpassword.Password) || string.IsNullOrEmpty(txtboxfirstname.Text) || string.IsNullOrWhiteSpace(txtboxfirstname.Text) || string.IsNullOrEmpty(txtboxlastname.Text) || string.IsNullOrWhiteSpace(txtboxlastname.Text))
+                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
                 {
-                    txtblockisrequired.Visibility = Visibility.Visible;
-                    return;
+                    Account user = operations.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, txtblockstatus);
+                    if (user != null)
+                        NavigationService.Navigate(new LoginPage());
                 }
                 else
-                {
-                    Account user = operations.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text);
-                    Globals.LoggedInUser = user;
-                    NavigationService.Navigate(new LoginPage());
-                }
+                    return;
             }
             else
             {
-                if (string.IsNullOrEmpty(txtboxusername.Text) || string.IsNullOrWhiteSpace(txtboxusername.Text) || string.IsNullOrEmpty(txtboxpassword.Password) || string.IsNullOrWhiteSpace(txtboxpassword.Password) || string.IsNullOrEmpty(txtboxfirstname.Text) || string.IsNullOrWhiteSpace(txtboxfirstname.Text) || string.IsNullOrEmpty(txtboxlastname.Text) || string.IsNullOrWhiteSpace(txtboxlastname.Text))
+                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
                 {
-                    txtblockisrequired.Visibility = Visibility.Visible;
-                    return;
+                    Account user = operations.RegisterUserWithAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text), txtblockstatus);
+
+                    if (user != null)
+                        NavigationService.Navigate(new LoginPage());
                 }
                 else
-                {
-
-                    Account user = operations.RegisterUserWithAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text));
-                    Globals.LoggedInUser = user;
-                    NavigationService.Navigate(new LoginPage());
-                }
+                    return;
             }
-
         }
 
         private void Txtbox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (txtboxusername.Text.Length > 0 && txtboxpassword.Password.Length > 0 && txtboxfirstname.Text.Length > 0 && txtboxlastname.Text.Length > 0)
+            {
                 BtnRegister.IsEnabled = true;
+                txtblockisrequired.Visibility = Visibility.Hidden;
+            }
             else
             {
                 BtnRegister.IsEnabled = false;
+                txtblockisrequired.Visibility = Visibility.Visible;
             }
-
-            if (string.IsNullOrEmpty(txtboxusername.Text) || string.IsNullOrWhiteSpace(txtboxusername.Text))
-                txtblockusernameisrequired.Text = "*";
 
         }
 
         private void password_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (txtboxusername.Text.Length > 0 && txtboxpassword.Password.Length > 0 && txtboxfirstname.Text.Length > 0 && txtboxlastname.Text.Length > 0)
+            {
                 BtnRegister.IsEnabled = true;
+                txtblockisrequired.Visibility = Visibility.Hidden;
+            }
             else
             {
                 BtnRegister.IsEnabled = false;
+                txtblockisrequired.Visibility = Visibility.Visible;
             }
         }
     }

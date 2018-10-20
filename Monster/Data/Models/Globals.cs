@@ -8,6 +8,6 @@ namespace Monster
 {
     class Globals
     {
-        public static Account LoggedInUser { get; set; }
+        public static Account User { get; set; }
     }
 }

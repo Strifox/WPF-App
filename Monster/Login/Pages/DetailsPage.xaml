@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel Margin="0" VerticalAlignment="Center">
-            <TextBlock x:Name="tbkWelcome" Text="Welcome" HorizontalAlignment="Center" FontSize="36" />
+            <TextBlock x:Name="txtboxWelcome" Text="Welcome" HorizontalAlignment="Center" FontSize="36" />
             <Grid HorizontalAlignment="Center" Width="200">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />

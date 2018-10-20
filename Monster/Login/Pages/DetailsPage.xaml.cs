@@ -31,34 +31,16 @@ namespace Monster.Login.Pages
         */
         private void DetailsPage_Loaded(object sender, RoutedEventArgs e)
         {
-            
             ShowUserInfo();
         }
 
-        /**
-         * Fetch User Details
-         */
-        //private void FetchUserDetails()
-        //{
-        //    ApiOperations ops = new ApiOperations();
-        //    Account user = ops.GetUserDetails(Globals.LoggedInUser);
-        //    if (user == null)
-        //    {
-        //        MessageBox.Show("Session expired");
-        //        // Navigate back to login page
-        //        NavigationService.Navigate(new LoginPage());
-        //    }
-
-        //    Globals.LoggedInUser = user;
-        //}
 
         /**
          * Show User Info on the Screen
          */
         private void ShowUserInfo()
         {
-            tbkWelcome.Text += " " + Globals.LoggedInUser.Username;
-          
+            txtboxWelcome.Text += " " + Globals.LoggedInUser.Firstname;
         }
 
         /**

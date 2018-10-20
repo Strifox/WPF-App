@@ -31,7 +31,7 @@ namespace Monster
             {
                 return new Tuple<bool, string>(false, textBlock.Text = "Password must contain at least one numeric char.");
             }
-            // perhaps the requirements meant to be 1 or more capital letters?
+            // perhaps the requirements meant to be 1 capital letter?
             //if (password.Count(char.IsUpper) != 1)
             if (!password.Any(char.IsUpper))
             {
@@ -41,11 +41,10 @@ namespace Monster
             {
                 return new Tuple<bool, string>(false, textBlock.Text = "Password is too short; must be at least 8 characters (15 max).");
             }
-
-            if (password.Length > 15)
-            {
-                return new Tuple<bool, string>(false, textBlock.Text = "Password is too long; must be no more than 15 characters (8 min).");
-            }
+            //if (password.Length > 15)
+            //{
+            //    return new Tuple<bool, string>(false, textBlock.Text = "Password is too long; must be no more than 15 characters (8 min).");
+            //}
             return new Tuple<bool, string>(true, textBlock.Text = string.Empty);
         }
 

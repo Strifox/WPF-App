@@ -36,16 +36,25 @@ namespace Monster.Login.Pages
 
             if (Globals.LoggedInUser == null)
             {
-                txtblockinvalidusernameorpassword.Text = "Invalid username or password";
+                txtblockinvalidusernameorpassword.Visibility = Visibility.Visible;
                 return;
             }
-            txtblockinvalidusernameorpassword.Text = "Login successful";
             NavigationService.Navigate(new DetailsPage());
         }
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RegisterPage());
+        }
+
+        private void txtboxusername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            txtblockinvalidusernameorpassword.Visibility = Visibility.Hidden;
+        }
+
+        private void txtboxpassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            txtblockinvalidusernameorpassword.Visibility = Visibility.Hidden;
         }
     }
 }

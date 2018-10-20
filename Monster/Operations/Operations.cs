@@ -87,13 +87,9 @@ namespace Monster
             }
             catch (Exception)
             {
-
                 throw;
             }
-
-
         }
-
 
         public Account RegisterUserWithoutAge(string username, string password, string firstname, string lastname)
         {
@@ -107,13 +103,16 @@ namespace Monster
                     Globals.LoggedInUser = account;
                 }
                 else
+                {
                     MessageBox.Show("Username already exists");
+                    return Globals.LoggedInUser = null;
+                }
             }
             catch (Exception)
             {
                 throw;
             }
-            return account;
+            return Globals.LoggedInUser = null;
         }
 
         public Account RegisterUserWithAge(string username, string password, string firstname, string lastname, int age)
@@ -128,13 +127,16 @@ namespace Monster
                     Globals.LoggedInUser = account;
                 }
                 else
+                {
                     MessageBox.Show("Username already exists");
+                    return Globals.LoggedInUser = null;
+                }
             }
             catch (Exception)
             {
                 throw;
             }
-            return account;
+            return Globals.LoggedInUser = null;
         }
     }
 }

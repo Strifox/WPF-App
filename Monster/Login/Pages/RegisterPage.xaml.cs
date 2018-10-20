@@ -38,25 +38,46 @@ namespace Monster.Login.Pages
         {
             if (string.IsNullOrEmpty(txtboxage.Text) || string.IsNullOrWhiteSpace(txtboxage.Text))
             {
-                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
+                if (Globals.LoggedInUser != null)
                 {
-                    Account user = operations.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text);
-                    Globals.LoggedInUser = user;
-                    NavigationService.Navigate(new LoginPage());
+                    if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
+                    {
+                        Account user = operations.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text);
+                        Globals.LoggedInUser = user;
+                        NavigationService.Navigate(new LoginPage());
+                    }
+                    else
+                    {
+                        txtblockuserexists.Text = "Username exists";
+                        return;
+                    }
                 }
                 else
+                {
+                    txtblockuserexists.Text = "Username exists";
                     return;
+                }
             }
             else
             {
-                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
+                if (Globals.LoggedInUser != null)
                 {
-                    Account user = operations.RegisterUserWithAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text));
-                    Globals.LoggedInUser = user;
-                    NavigationService.Navigate(new LoginPage());
+                    if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
+                    {
+                        Account user = operations.RegisterUserWithAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text));
+                        Globals.LoggedInUser = user;
+                        NavigationService.Navigate(new LoginPage());
+                    }
+                    {
+                        txtblockuserexists.Text = "Username exists";
+                        return;
+                    }
                 }
                 else
+                {
+                    txtblockuserexists.Text = "Username exists";
                     return;
+                }
             }
         }
 

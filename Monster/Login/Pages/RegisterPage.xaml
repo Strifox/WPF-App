@@ -12,22 +12,22 @@
             <TextBlock Text="Username:" Margin="0,5,0,0" />
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                 <TextBox x:Name="txtboxusername" Padding="5" Width="300" TextChanged="txtboxusername_TextChanged" />
-                <TextBlock x:Name="txtblockusernameisrequired" Text="*" Foreground="Red" HorizontalAlignment="Right" Margin="1,0,0,0"  />
+                <TextBlock x:Name="txtblockusernameisrequired" Text="*" Foreground="Red" HorizontalAlignment="Right" Margin="1,-5,0,0"  />
             </StackPanel>
             <TextBlock Text="Password:" Margin="0,5,0,0" />
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                 <PasswordBox x:Name="txtboxpassword" Padding="5" Width="300" />
-                <TextBlock x:Name="txtblockpasswordisrequired" Text="*" Foreground="Red"  HorizontalAlignment="Right" Margin="1,0,0,0" />
+                <TextBlock x:Name="txtblockpasswordisrequired" Text="*" Foreground="Red"  HorizontalAlignment="Right" Margin="1,-5,0,0" />
             </StackPanel>
             <TextBlock Text="Firstname:" Margin="0,5,0,0" />
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                 <TextBox x:Name="txtboxfirstname" Padding="5"  Width="300" />
-                <TextBlock x:Name="txtblockfirstnameisrequired" Text="*" Foreground="Red" HorizontalAlignment="Right" Margin="1,0,0,0"  />
+                <TextBlock x:Name="txtblockfirstnameisrequired" Text="*" Foreground="Red" HorizontalAlignment="Right" Margin="1,-5,0,0"  />
             </StackPanel>
             <TextBlock Text="Lastname:" Margin="0,5,0,0" />
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
                 <TextBox x:Name="txtboxlastname" Padding="5"  Width="300" />
-                <TextBlock x:Name="txtblocklastnameisrequired" Text="*" Foreground="Red"  HorizontalAlignment="Right" Margin="1,0,0,0" />
+                <TextBlock x:Name="txtblocklastnameisrequired" Text="*" Foreground="Red"  HorizontalAlignment="Right" Margin="1,-5,0,0" />
             </StackPanel>
             <TextBlock Text="Age:" Margin="0,5,0,0" />
             <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">

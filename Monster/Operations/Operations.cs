@@ -35,14 +35,12 @@ namespace Monster
             {
                 return new Tuple<bool, MessageBoxResult>(false, MessageBox.Show("Password must contain at least one numeric char."));
             }
-
             // perhaps the requirements meant to be 1 or more capital letters?
             // if( !password.Any( char.IsUpper ) )
             if (password.Count(char.IsUpper) != 1)
             {
                 return new Tuple<bool, MessageBoxResult>(false, MessageBox.Show("Password must contain only 1 capital letter."));
             }
-
             if (password.Length < 8)
             {
                 return new Tuple<bool, MessageBoxResult>(false, MessageBox.Show("Password is too short; must be at least 8 characters (15 max)."));
@@ -55,6 +53,7 @@ namespace Monster
 
             return new Tuple<bool, MessageBoxResult>(true, MessageBox.Show("Password is valid."));
         }
+
 
         public Account AuthenticateUser(string username, string password)
         {

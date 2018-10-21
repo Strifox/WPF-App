@@ -36,9 +36,7 @@
             </StackPanel>
             <Button x:Name="BtnRegister" HorizontalAlignment="Left" Content="REGISTER" Padding="5" Margin="0,5,0,0" Width="300"  Click="BtnRegister_Click" IsEnabled="False" />
             <Button x:Name="BtnBack" HorizontalAlignment="Left" Content="BACK" Padding="5" Margin="0,5,0,0" Width="300" Click="BtnBack_Click" />
-            <TextBlock x:Name="txtblockisrequired" Text="* is required" HorizontalAlignment="Right" Foreground="Red" Margin="0,5,10,0" />
-            <TextBlock x:Name="txtblockinvalidpassword" Text="" HorizontalAlignment="Left" Foreground="Red" Margin="0,5,10,0" />
-            <TextBlock x:Name="txtblockstatus" Text="" HorizontalAlignment="Left" Foreground="Red" Margin="0,0,0,0" />
+            <TextBlock x:Name="txtblockstatus" Text="" HorizontalAlignment="Right" Foreground="Red" Margin="0,5,10,0" />
         </StackPanel>
     </Grid>
 </Page>

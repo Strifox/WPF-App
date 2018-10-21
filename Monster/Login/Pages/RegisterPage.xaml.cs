@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,28 +37,45 @@ namespace Monster.Login.Pages
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
+
             if (string.IsNullOrEmpty(txtboxage.Text) || string.IsNullOrWhiteSpace(txtboxage.Text))
             {
-                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
+                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockstatus).Item1)
                 {
                     Account user = operations.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, txtblockstatus);
                     if (user != null)
+                    {
+                        txtblockstatus.Text = "Account successfully created";
+                        txtblockstatus.Visibility = Visibility.Visible;
+                        Thread.Sleep(1000);
                         NavigationService.Navigate(new LoginPage());
+                    }
                 }
                 else
+                {
+                    txtblockstatus.Visibility = Visibility.Visible;
                     return;
+                }
             }
             else
             {
-                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockinvalidpassword).Item1)
+                if (Operations.IsValidPassword(txtboxpassword.Password, txtblockstatus).Item1)
                 {
                     Account user = operations.RegisterUserWithAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text), txtblockstatus);
 
                     if (user != null)
+                    {
+                        txtblockstatus.Text = "Account successfully created";
+                        txtblockstatus.Visibility = Visibility.Visible;
+                        Thread.Sleep(1000);
                         NavigationService.Navigate(new LoginPage());
+                    }
                 }
                 else
+                {
+                    txtblockstatus.Visibility = Visibility.Visible;
                     return;
+                }
             }
         }
 
@@ -66,12 +84,14 @@ namespace Monster.Login.Pages
             if (txtboxusername.Text.Length > 0 && txtboxpassword.Password.Length > 0 && txtboxfirstname.Text.Length > 0 && txtboxlastname.Text.Length > 0)
             {
                 BtnRegister.IsEnabled = true;
-                txtblockisrequired.Visibility = Visibility.Hidden;
+                txtblockstatus.Text = "* is required";
+                txtblockstatus.Visibility = Visibility.Hidden;
             }
             else
             {
                 BtnRegister.IsEnabled = false;
-                txtblockisrequired.Visibility = Visibility.Visible;
+                txtblockstatus.Text = "* is required";
+                txtblockstatus.Visibility = Visibility.Visible;
             }
 
         }
@@ -81,12 +101,14 @@ namespace Monster.Login.Pages
             if (txtboxusername.Text.Length > 0 && txtboxpassword.Password.Length > 0 && txtboxfirstname.Text.Length > 0 && txtboxlastname.Text.Length > 0)
             {
                 BtnRegister.IsEnabled = true;
-                txtblockisrequired.Visibility = Visibility.Hidden;
+                txtblockstatus.Text = "* is required";
+                txtblockstatus.Visibility = Visibility.Hidden;
             }
             else
             {
                 BtnRegister.IsEnabled = false;
-                txtblockisrequired.Visibility = Visibility.Visible;
+                txtblockstatus.Text = "* is required";
+                txtblockstatus.Visibility = Visibility.Visible;
             }
         }
     }

@@ -11,9 +11,9 @@
         <StackPanel HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="auto">
             <TextBlock Text="Welcome to Monster" HorizontalAlignment="Center" FontSize="36" />
             <TextBlock Text="Username:" Margin="0,5,0,0" />
-            <TextBox x:Name="txtboxusername" Padding="5" TextChanged="txtboxusername_TextChanged" />
+            <TextBox x:Name="txtboxusername" Padding="5" TextChanged="Txtboxusername_TextChanged" />
             <TextBlock Text="Password:" Margin="0,5,0,0" />
-            <PasswordBox x:Name="txtboxpassword" Padding="5" PasswordChanged="txtboxpassword_PasswordChanged" />
+            <PasswordBox x:Name="txtboxpassword" Padding="5" PasswordChanged="Txtboxpassword_PasswordChanged" />
             <Button x:Name="BtnSubmit" Content="LOGIN" Padding="5" Margin="0,5,0,0" Click="BtnSubmit_Click" />
             <Button x:Name="BtnRegister" Content="REGISTER" Padding="5" Margin="0,5,0,0" Click="BtnRegister_Click" />
             <TextBlock x:Name="txtblockinvalidusernameorpassword" Text="Invalid username or password" Visibility="Hidden" HorizontalAlignment="Left" Foreground="Red" Margin="0,0,0,0" />

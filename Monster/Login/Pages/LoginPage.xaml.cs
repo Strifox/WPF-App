@@ -34,7 +34,7 @@ namespace Monster.Login.Pages
         {
             operations.AuthenticateUser(txtboxusername.Text, txtboxpassword.Password);
 
-            if (Globals.User == null)
+            if (Globals.LoggedInUser == null)
             {
                 txtblockinvalidusernameorpassword.Visibility = Visibility.Visible;
                 return;
@@ -47,12 +47,12 @@ namespace Monster.Login.Pages
             NavigationService.Navigate(new RegisterPage());
         }
 
-        private void txtboxusername_TextChanged(object sender, TextChangedEventArgs e)
+        private void Txtboxusername_TextChanged(object sender, TextChangedEventArgs e)
         {
             txtblockinvalidusernameorpassword.Visibility = Visibility.Hidden;
         }
 
-        private void txtboxpassword_PasswordChanged(object sender, RoutedEventArgs e)
+        private void Txtboxpassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             txtblockinvalidusernameorpassword.Visibility = Visibility.Hidden;
         }

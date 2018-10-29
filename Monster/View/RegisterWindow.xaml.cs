@@ -1,34 +1,21 @@
 ﻿using Monster.Model.Models;
 using Monster.UI.ViewModel;
-using Monster.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace Monster.View
+namespace Monster.UI.View
 {
     /// <summary>
     /// Interaction logic for RegisterWindow.xaml
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        private RegisterViewModel registerViewModel = new RegisterViewModel();
-
+        private RegisterViewModel model = new RegisterViewModel();
 
         public RegisterWindow()
         {
             InitializeComponent();
+            DataContext = model;
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -38,40 +25,10 @@ namespace Monster.View
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(txtboxage.Text) || string.IsNullOrWhiteSpace(txtboxage.Text))
-            {
-                if (RegisterViewModel.IsValidPassword(txtboxpassword.Password, txtblockstatus).Item1)
-                {
-                    Account user = registerViewModel.RegisterUserWithoutAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, txtblockstatus);
+            if (!model.IsValidRegistration(txtblockstatus))
+                return;
 
-                    if (user != null)
-                    {
-                        ViewModelBase.OpenAndCloseWindow(new LoginWindow(), this);
-                    }
-                }
-                else
-                {
-                    txtblockstatus.Visibility = Visibility.Visible;
-                    return;
-                }
-            }
-            else
-            {
-                if (RegisterViewModel.IsValidPassword(txtboxpassword.Password, txtblockstatus).Item1)
-                {
-                    Account user = registerViewModel.RegisterUserWithAge(txtboxusername.Text, txtboxpassword.Password, txtboxfirstname.Text, txtboxlastname.Text, int.Parse(txtboxage.Text), txtblockstatus);
-
-                    if (user != null)
-                    {
-                        ViewModelBase.OpenAndCloseWindow(new LoginWindow(), this);
-                    }
-                }
-                else
-                {
-                    txtblockstatus.Visibility = Visibility.Visible;
-                    return;
-                }
-            }
+            ViewModelBase.OpenAndCloseWindow(new LoginWindow(), this);
         }
 
         private void Txtbox_TextChanged(object sender, TextChangedEventArgs e)
@@ -88,7 +45,6 @@ namespace Monster.View
                 txtblockstatus.Text = "* is required";
                 txtblockstatus.Visibility = Visibility.Visible;
             }
-
         }
 
         private void Password_PasswordChanged(object sender, RoutedEventArgs e)
@@ -104,6 +60,11 @@ namespace Monster.View
                 BtnRegister.IsEnabled = false;
                 txtblockstatus.Text = "* is required";
                 txtblockstatus.Visibility = Visibility.Visible;
+            }
+
+            if (DataContext != null)
+            {
+                ((dynamic)DataContext).Password = ((PasswordBox)sender).Password;
             }
         }
     }

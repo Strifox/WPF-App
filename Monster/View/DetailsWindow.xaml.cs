@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Monster.Model.Models;
+using Monster.UI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,37 +12,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Monster.Login.Pages
+namespace Monster.View
 {
-    /// <summary>
-    /// Interaction logic for DetailsPage.xaml
-    /// </summary>
-    public partial class DetailsPage : Page
+    public partial class DetailsWindow : Window
     {
-        public DetailsPage()
+        private DetailsViewModel ViewModel;
+
+        public DetailsWindow(DetailsViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
+            ViewModel = viewModel;
         }
-        /**
-        * Details Page Loaded
-        * @param  object  sender
-        * @param  RoutedEventArgs e
-        */
-        private void DetailsPage_Loaded(object sender, RoutedEventArgs e)
+    
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ShowUserInfo();
+           await ViewModel.LoadAsync();
         }
-
 
         /**
          * Show User Info on the Screen
          */
         private void ShowUserInfo()
         {
-            txtboxWelcome.Text += " " + Globals.User.Firstname;
+            txtboxWelcome.Text += " " + Globals.LoggedInUser.Firstname;
         }
 
         /**
@@ -50,9 +47,8 @@ namespace Monster.Login.Pages
          */
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
-            Globals.User = null;
-            NavigationService.Navigate(new LoginPage());
+            Globals.LoggedInUser = null;
         }
+
     }
 }
- 

@@ -27,7 +27,7 @@ namespace Monster.Model.Models
             PasswordHash = Hashing.ComputeSha256Hash(string.Concat(Salt, password));
         }
 
-        public Account(string userName, string password, string firstname, string lastname, int age)
+        public Account(string userName, string password, string firstname, string lastname, int? age)
         {
             Username = userName;
             Firstname = firstname;

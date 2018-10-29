@@ -11,15 +11,14 @@ namespace Monster.UI.View
     /// </summary>
     public partial class LoginWindow : Window
     {
-        private LoginViewModel LoginViewModel;
+        private LoginViewModel LoginViewModel = new LoginViewModel();
         private readonly AccountContext context = new AccountContext();
 
-        public LoginWindow(LoginViewModel viewModel)
+        public LoginWindow()
         {
             context.Database.CreateIfNotExists();
             InitializeComponent();
-            DataContext = viewModel;
-            LoginViewModel = viewModel;
+            DataContext = LoginViewModel;
         }
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
@@ -38,8 +37,7 @@ namespace Monster.UI.View
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
         {
-            RegisterViewModel.ShowRegisterWindow();
-            Close();
+            ViewModelBase.OpenAndCloseWindow(new RegisterWindow(), this);
         }
 
         private void Txtboxusername_TextChanged(object sender, TextChangedEventArgs e)
@@ -51,7 +49,7 @@ namespace Monster.UI.View
         {
             txtblockinvalidusernameorpassword.Visibility = Visibility.Hidden;
             if (DataContext != null)
-            { ((dynamic)DataContext).SecurePassword = ((PasswordBox)sender).SecurePassword; }
+            { ((dynamic)DataContext).Password = ((PasswordBox)sender).Password; }
         }
     }
 }

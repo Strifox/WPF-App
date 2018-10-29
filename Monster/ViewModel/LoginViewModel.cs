@@ -14,17 +14,7 @@ namespace Monster.UI.ViewModel
     {
         private readonly AccountContext context = new AccountContext();
         public string Username { get; set; }
-        public SecureString SecurePassword { private get; set; }
-
-        public static void ShowLoginWindow()
-        {
-            var bootstrapper = new Bootstrapper();
-            var container = bootstrapper.Bootstrap();
-
-            var detailswindow = container.Resolve<DetailsWindow>();
-            detailswindow.Show();
-        }
-
+        public string Password { private get; set; }
 
         public Account AuthenticateUser()
         {
@@ -38,7 +28,7 @@ namespace Monster.UI.ViewModel
                 {
                     account = AccountDataService.GetAccountByName(context, Username.ToLower());
 
-                    string saltedPassword = string.Concat(account.Salt, SecurePassword);
+                    string saltedPassword = string.Concat(account.Salt, Password);
                     string hashedPassword = Hashing.ComputeSha256Hash(saltedPassword);
 
                     bool matchedPassword = string.Equals(account.PasswordHash, hashedPassword);

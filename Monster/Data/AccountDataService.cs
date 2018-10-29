@@ -25,7 +25,6 @@ namespace Monster.UI.Data
 
         public static Account GetAccountByName(AccountContext context, string name)
         {
-
             return (from account in context.Accounts
                     where account.Username == name
                     select account).Single();

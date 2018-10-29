@@ -31,7 +31,7 @@
             <TextBox Grid.Row="3" Width="250" HorizontalAlignment="Left" Margin="10 0 10 10" Text="{Binding SelectedNote.Title, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Grid.Row="4" Text="Note" Margin="10 10 10 0" />
             <TextBox Grid.Row="5" Width="400" Height="150"  HorizontalAlignment="Left" Margin="10 0 10 10" Text="{Binding SelectedNote.Content, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-            <Button Grid.Row="6" HorizontalAlignment="Left" Margin="10" Content="Save" Width="60" />
+            <Button Grid.Row="6" HorizontalAlignment="Left" Margin="10" Content="Save" Width="60" Click="Button_Click" />
         </Grid>
     </Grid>
 </Window>

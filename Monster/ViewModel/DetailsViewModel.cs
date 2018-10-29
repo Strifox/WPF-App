@@ -48,8 +48,11 @@ namespace Monster.UI.ViewModel
             {
                 Notes.Add(note);
             }
-
         }
 
+        public async Task SaveNoteAsync()
+        {
+          await _noteDataService.SaveNote(SelectedNote.Title, SelectedNote.Content);
+        }
     }
 }

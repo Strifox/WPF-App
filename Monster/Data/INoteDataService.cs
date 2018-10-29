@@ -8,5 +8,6 @@ namespace Monster.UI.Data
     public interface INoteDataService
     {
         Task<List<Note>> GetAllNotesAsync();
+        Task SaveNote(string title, string content);
     }
 }

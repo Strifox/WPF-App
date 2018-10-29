@@ -1,9 +1,8 @@
 ﻿using Autofac;
-using Monster.DataAccess;
 using Monster.Model.Models;
 using Monster.UI.Data;
 using Monster.UI.Startup;
-using Monster.View;
+using Monster.UI.View;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -19,7 +18,8 @@ namespace Monster.UI.ViewModel
         public Note SelectedNote
         {
             get { return _selectedNote; }
-            set {
+            set
+            {
                 _selectedNote = value;
                 OnPropertyChanged();
             }
@@ -50,6 +50,6 @@ namespace Monster.UI.ViewModel
             }
 
         }
-       
+
     }
 }

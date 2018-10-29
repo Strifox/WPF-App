@@ -1,22 +1,9 @@
 ﻿using Monster.Model.Models;
 using Monster.UI.ViewModel;
-using Monster.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace Monster.View
+namespace Monster.UI.View
 {
     /// <summary>
     /// Interaction logic for RegisterWindow.xaml
@@ -33,7 +20,8 @@ namespace Monster.View
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
-            ViewModelBase.OpenAndCloseWindow(new LoginWindow(), this);
+            LoginViewModel.ShowLoginWindow();
+            Close();
         }
 
         private void BtnRegister_Click(object sender, RoutedEventArgs e)
@@ -46,7 +34,8 @@ namespace Monster.View
 
                     if (user != null)
                     {
-                        ViewModelBase.OpenAndCloseWindow(new LoginWindow(), this);
+                        LoginViewModel.ShowLoginWindow();
+                        Close();
                     }
                 }
                 else
@@ -63,7 +52,8 @@ namespace Monster.View
 
                     if (user != null)
                     {
-                        ViewModelBase.OpenAndCloseWindow(new LoginWindow(), this);
+                        LoginViewModel.ShowLoginWindow();
+                        Close();
                     }
                 }
                 else

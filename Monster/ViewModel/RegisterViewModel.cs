@@ -1,22 +1,27 @@
-﻿using Monster.DataAccess;
+﻿using Autofac;
+using Monster.DataAccess;
 using Monster.Model.Models;
 using Monster.UI.Data;
-using Monster.UI.ViewModel;
-using Monster.View;
+using Monster.UI.Startup;
+using Monster.UI.View;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Monster.ViewModel
+namespace Monster.UI.ViewModel
 {
     public class RegisterViewModel : ViewModelBase
     {
         private AccountContext context = new AccountContext();
 
-        public RegisterViewModel()
+        public static void ShowRegisterWindow()
         {
+            var bootstrapper = new Bootstrapper();
+            var container = bootstrapper.Bootstrap();
 
+            var detailswindow = container.Resolve<DetailsWindow>();
+            detailswindow.Show();
         }
 
         public Account RegisterUserWithoutAge(string username, string password, string firstname, string lastname, TextBlock textBlock)

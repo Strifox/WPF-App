@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Autofac;
+using Monster.UI.Startup;
+using Monster.UI.View;
+using Monster.UI.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,9 +17,6 @@ namespace Monster
     /// </summary>
     public partial class App : Application
     {
-        private void Application_Startup(object sender, StartupEventArgs e)
-        {
-
-        }
+        
     }
 }

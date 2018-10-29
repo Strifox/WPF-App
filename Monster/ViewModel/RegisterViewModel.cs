@@ -1,79 +1,95 @@
-﻿using Monster.DataAccess;
+﻿using Autofac;
+using Monster.DataAccess;
 using Monster.Model.Models;
 using Monster.UI.Data;
-using Monster.UI.ViewModel;
-using Monster.View;
+using Monster.UI.Startup;
+using Monster.UI.View;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Monster.ViewModel
+namespace Monster.UI.ViewModel
 {
     public class RegisterViewModel : ViewModelBase
     {
         private AccountContext context = new AccountContext();
 
-        public RegisterViewModel()
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string Age { get; set; }
+
+
+        public bool IsValidRegistration(TextBlock textBlock)
         {
+            Account account = new Account(Username.ToLower(), Password, Firstname, Lastname);
 
-        }
-
-        public Account RegisterUserWithoutAge(string username, string password, string firstname, string lastname, TextBlock textBlock)
-        {
-            Account account = new Account(username.ToLower(), password, firstname, lastname);
-
-            if (!AccountDataService.DoesPlayerExistWithName(context, account.Username))
+            if (string.IsNullOrEmpty(Age) || string.IsNullOrWhiteSpace(Age))
             {
-                textBlock.Text = "Successfully created account";
-                textBlock.Visibility = Visibility.Visible;
-                context.Accounts.Add(account);
-                context.SaveChanges();
-                return account;
+                if (IsValidPassword(textBlock).Item1)
+                {
+                    if (!AccountDataService.DoesPlayerExistWithName(context, account.Username))
+                    {
+                        textBlock.Text = "Successfully created account";
+                        textBlock.Visibility = Visibility.Visible;
+                        context.Accounts.Add(account);
+                        context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        textBlock.Text = "Username already exists";
+                        textBlock.Visibility = Visibility.Visible;
+                        return false;
+                    }
+                }
+                else
+                    return false;
             }
             else
             {
-                textBlock.Text = "Username already exists";
-                textBlock.Visibility = Visibility.Visible;
-                return account = null;
+                account = new Account(Username.ToLower(), Password, Firstname, Lastname, int.Parse(Age));
+
+                if (IsValidPassword(textBlock).Item1)
+                {
+                    if (!AccountDataService.DoesPlayerExistWithName(context, account.Username))
+                    {
+                        textBlock.Text = "Creating Account";
+                        textBlock.Visibility = Visibility.Visible;
+                        context.Accounts.Add(account);
+                        context.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        textBlock.Text = "Username already exists";
+                        textBlock.Visibility = Visibility.Visible;
+                        return false;
+                    }
+                }
+                else
+                    return false;
             }
         }
 
-        public Account RegisterUserWithAge(string username, string password, string firstname, string lastname, int age, TextBlock textBlock)
+        public Tuple<bool, string> IsValidPassword(TextBlock textBlock)
         {
-            Account account = new Account(username.ToLower(), password, firstname, lastname, age);
+            textBlock.Visibility = Visibility.Visible;
 
-            if (!AccountDataService.DoesPlayerExistWithName(context, account.Username))
-            {
-                textBlock.Text = "Creating Account";
-                textBlock.Visibility = Visibility.Visible;
-                context.Accounts.Add(account);
-                context.SaveChanges();
-                return account;
-            }
-            else
-            {
-                textBlock.Text = "Username already exists";
-                textBlock.Visibility = Visibility.Visible;
-                return account = null;
-            }
-
-        }
-
-        public static Tuple<bool, string> IsValidPassword(string password, TextBlock textBlock)
-        {
-            if (password.Contains(" "))
+            if (Password.Contains(" "))
                 return new Tuple<bool, string>(false, textBlock.Text = "Password cannot contain white spaces.");
 
-            if (!password.Any(char.IsNumber))
+            if (!Password.Any(char.IsNumber))
                 return new Tuple<bool, string>(false, textBlock.Text = "Password must contain at least one numeric char.");
 
             // perhaps the requirements meant to be 1 capital letter?
             //if (password.Count(char.IsUpper) != 1)
-            if (!password.Any(char.IsUpper))
+            if (!Password.Any(char.IsUpper))
                 return new Tuple<bool, string>(false, textBlock.Text = "Password must contain at least 1 capital letter.");
 
-            if (password.Length < 8)
+            if (Password.Length < 8)
                 return new Tuple<bool, string>(false, textBlock.Text = "Password is too short, must be\n at least 8 characters.");
 
             return new Tuple<bool, string>(true, textBlock.Text = string.Empty);

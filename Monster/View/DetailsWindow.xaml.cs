@@ -14,10 +14,11 @@ namespace Monster.UI.View
             DataContext = viewModel;
             ViewModel = viewModel;
         }
-    
+
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
            await ViewModel.LoadAsync();
+            ShowUserInfo();
         }
 
         /**
@@ -36,7 +37,12 @@ namespace Monster.UI.View
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
             Globals.LoggedInUser = null;
+            ViewModelBase.OpenAndCloseWindow(new LoginWindow(), this);
         }
 
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.SaveNoteAsync();
+        }
     }
 }

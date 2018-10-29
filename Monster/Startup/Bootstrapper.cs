@@ -8,15 +8,7 @@ namespace Monster.UI.Startup
 {
     public class Bootstrapper
     {
-        public IContainer BootstrapLogin()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterType<LoginWindow>().AsSelf();
-            builder.RegisterType<LoginViewModel>().AsSelf();
-            builder.RegisterType<NoteDataService>().As<INoteDataService>();
-
-            return builder.Build();
-        }
+  
         public IContainer Bootstrap()
         {
             var builder = new ContainerBuilder();

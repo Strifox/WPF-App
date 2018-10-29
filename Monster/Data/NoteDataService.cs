@@ -22,5 +22,16 @@ namespace Monster.UI.Data
                 return await context.Notes.AsNoTracking().ToListAsync();
             }
         }
+
+        public async Task SaveNote(string title, string content)
+        {
+            using (var context = _contextCreator())
+            {
+                Note note = new Note(title, content);
+                context.Notes.Add(note);
+              await context.SaveChangesAsync();
+            }
+            
+        }
     }
 }

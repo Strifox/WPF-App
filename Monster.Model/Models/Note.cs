@@ -13,6 +13,17 @@ namespace Monster.Model.Models
         public string Content { get; set; }
         public DateTime NoteDateTime { get; set; } = DateTime.Now;
 
-        public virtual Account Account { get; set; }    
+        public virtual Account Account { get; set; }
+
+        public Note(string title, string content)
+        {
+            Title = title;
+            Content = content;
+        }
+
+        public Note()
+        {
+
+        }
     }
 }

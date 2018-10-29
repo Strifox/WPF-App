@@ -1,13 +1,14 @@
-﻿using System;
+﻿using Monster.DataAccess;
+using Monster.Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
-namespace Monster
+namespace Monster.UI.Data
 {
-    class Queries
+    public class AccountDataService
     {
         public static bool DoesPlayerExistWithName(AccountContext context, string name)
         {
@@ -17,7 +18,7 @@ namespace Monster
             foreach (var user in accounts)
             {
                 if (user.Username == name)
-                return true;
+                    return true;
             }
             return false;
         }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Monster
+namespace Monster.Model.Models
 {
-    class Globals
+    public class Globals
     {
         public static Account LoggedInUser { get; set; }
     }

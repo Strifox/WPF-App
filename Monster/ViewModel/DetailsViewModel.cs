@@ -13,6 +13,8 @@ namespace Monster.UI.ViewModel
         private readonly INoteDataService _noteDataService;
         private Note _selectedNote;
         public ObservableCollection<Note> Notes { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
 
 
         public Note SelectedNote
@@ -34,13 +36,15 @@ namespace Monster.UI.ViewModel
             detailswindow.Show();
         }
 
+
+
         public DetailsViewModel(INoteDataService noteDataService)
         {
             Notes = new ObservableCollection<Note>();
             _noteDataService = noteDataService;
         }
 
-        public async Task LoadAsync()
+        public async void LoadAsync()
         {
             var notes = await _noteDataService.GetAllNotesAsync();
             Notes.Clear();
@@ -52,7 +56,7 @@ namespace Monster.UI.ViewModel
 
         public async Task SaveNoteAsync()
         {
-          await _noteDataService.SaveNote(SelectedNote.Title, SelectedNote.Content);
+          await _noteDataService.SaveNote(Title, Content);
         }
     }
 }

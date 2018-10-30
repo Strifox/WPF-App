@@ -1,6 +1,7 @@
 ﻿using Monster.Model.Models;
 using Monster.UI.ViewModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Monster.UI.View
 {
@@ -11,13 +12,13 @@ namespace Monster.UI.View
         public DetailsWindow(DetailsViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = viewModel;
             ViewModel = viewModel;
+            DataContext = viewModel;
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           await ViewModel.LoadAsync();
+            ViewModel.LoadAsync();
             ShowUserInfo();
         }
 
@@ -40,9 +41,22 @@ namespace Monster.UI.View
             ViewModelBase.OpenAndCloseWindow(new LoginWindow(), this);
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             await ViewModel.SaveNoteAsync();
+            ViewModel.LoadAsync();
+        }
+
+        private void TxtboxTitle_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (DataContext != null)
+            { ((dynamic)DataContext).Title = ((TextBox)sender).Text; }
+        }
+
+        private void TxtboxContent_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (DataContext != null)
+            { ((dynamic)DataContext).Content = ((TextBox)sender).Text; }
         }
     }
 }

@@ -10,9 +10,15 @@
             <ColumnDefinition Width="150"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <ListView ItemsSource="{Binding Notes}"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" ItemsSource="{Binding Notes}"
                   SelectedItem="{Binding SelectedNote, Mode=TwoWay}"
                   DisplayMemberPath="Title" />
+        <Button x:Name="BtnAddNote" Grid.Row="1" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="+"/> 
+        <Button x:Name="BtnRemoveNote" Margin="20 0" Grid.Row="2" Width="20" Height="20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="-"/>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -28,10 +34,10 @@
             <Button x:Name="btnLogout" HorizontalAlignment="Right" Content="Logout" Width="45" Height="20" Click="BtnLogout_Click"/>
 
             <TextBlock Grid.Row="2" Text="Title" Margin="10 10 10 0" />
-            <TextBox Grid.Row="3" Width="250" HorizontalAlignment="Left" Margin="10 0 10 10" Text="{Binding SelectedNote.Title, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="txtboxTitle" Grid.Row="3" Width="250" HorizontalAlignment="Left" Margin="10 0 10 10" Text="{Binding SelectedNote.Title, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtboxTitle_TextChanged" />
             <TextBlock Grid.Row="4" Text="Note" Margin="10 10 10 0" />
-            <TextBox Grid.Row="5" Width="400" Height="150"  HorizontalAlignment="Left" Margin="10 0 10 10" Text="{Binding SelectedNote.Content, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-            <Button Grid.Row="6" HorizontalAlignment="Left" Margin="10" Content="Save" Width="60" Click="Button_Click" />
+            <TextBox x:Name="txtboxContent" Grid.Row="5" Width="400" Height="150"  HorizontalAlignment="Left" Margin="10 0 10 10" Text="{Binding SelectedNote.Content, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" TextChanged="TxtboxContent_TextChanged" />
+            <Button x:Name="BtnSave" Grid.Row="6" HorizontalAlignment="Left" Margin="10" Content="Save" Width="60" Click="BtnSave_Click" />
         </Grid>
     </Grid>
 </Window>

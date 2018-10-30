@@ -12,6 +12,7 @@ namespace Monster.UI.Data
     public class NoteDataService : INoteDataService
     {
         private readonly Func<AccountContext> _contextCreator;
+        private AccountContext context = new AccountContext();
 
         public NoteDataService(Func<AccountContext> contextCreator) => _contextCreator = contextCreator;
 
@@ -23,15 +24,19 @@ namespace Monster.UI.Data
             }
         }
 
+        //public IEnumerable<Note> GetAll()
+        //{
+        //    using (var context = _contextCreator())
+        //    {
+        //        return context.Notes.AsNoTracking().ToList();
+        //    }
+        //}
+
         public async Task SaveNote(string title, string content)
         {
-            using (var context = _contextCreator())
-            {
-                Note note = new Note(title, content);
-                context.Notes.Add(note);
-              await context.SaveChangesAsync();
-            }
-            
+            Note note = new Note(title, content);
+            context.Notes.Add(note);
+            await context.SaveChangesAsync();
         }
     }
 }

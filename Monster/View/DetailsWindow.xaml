@@ -11,7 +11,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="400"/>
+            <RowDefinition Height="390"/>
             <RowDefinition />
         </Grid.RowDefinitions>
         <ListView Grid.Row="0" ItemsSource="{Binding Notes}"

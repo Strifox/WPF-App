@@ -9,6 +9,7 @@ namespace Monster.Model.Models
     public class Note
     {
         public int Id { get; set; }
+        public int LoggedInAccountId { get; set; } = Globals.LoggedInUser.Id;
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime NoteDateTime { get; set; } = DateTime.Now;

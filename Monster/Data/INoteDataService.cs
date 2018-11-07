@@ -9,6 +9,6 @@ namespace Monster.UI.Data
     {
         Task<List<Note>> GetAllNotesAsync();
         //IEnumerable<Note> GetAll();
-        Task SaveNote(string title, string content);
+        Task SaveNoteAsync(string title, string content);
     }
 }

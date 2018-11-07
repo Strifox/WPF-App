@@ -12,6 +12,7 @@ namespace Monster.UI.Startup
         public IContainer Bootstrap()
         {
             var builder = new ContainerBuilder();
+
             builder.RegisterType<AccountContext>().AsSelf();
 
             builder.RegisterType<DetailsViewModel>().AsSelf();

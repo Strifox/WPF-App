@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Monster.DataAccess
 {
-   public class AccountContext : DbContext
+    public class AccountContext : DbContext
     {
 
-        public AccountContext() : base("Accounts") { }
+        public AccountContext() : base("AccountDB") { }
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Note> Notes { get; set; }
@@ -33,6 +33,8 @@ namespace Monster.DataAccess
             noteBuilder.Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             noteBuilder.Property(x => x.Title).IsRequired();
             noteBuilder.Property(x => x.Content).IsRequired();
+            noteBuilder.HasRequired(x => x.Account).WithMany(x => x.Notes).HasForeignKey(x => x.LoggedInAccountId);
+
         }
     }
 }

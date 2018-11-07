@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Monster.DataAccess;
 using Monster.Model.Models;
 using Monster.UI.Data;
 using Monster.UI.Startup;
@@ -36,8 +37,6 @@ namespace Monster.UI.ViewModel
             detailswindow.Show();
         }
 
-
-
         public DetailsViewModel(INoteDataService noteDataService)
         {
             Notes = new ObservableCollection<Note>();
@@ -56,7 +55,7 @@ namespace Monster.UI.ViewModel
 
         public async Task SaveNoteAsync()
         {
-          await _noteDataService.SaveNote(Title, Content);
+            await _noteDataService.SaveNoteAsync(Title, Content);
         }
     }
 }

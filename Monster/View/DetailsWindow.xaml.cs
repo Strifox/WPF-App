@@ -18,45 +18,31 @@ namespace Monster.UI.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ViewModel.LoadAsync();
+            ViewModel.LoadNoteAsync();
             ShowUserInfo();
         }
 
-        /**
-         * Show User Info on the Screen
-         */
         private void ShowUserInfo()
         {
             txtboxWelcome.Text += " " + Globals.LoggedInUser.Firstname;
         }
 
-        /**
-         * Logout Method to be called on the logout Button
-         * @param  object sender
-         * @param  RoutedEventArgs e
-         */
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
             Globals.LoggedInUser = null;
             ViewModelBase.OpenAndCloseWindow(new LoginWindow(), this);
         }
 
-        private async void BtnSave_Click(object sender, RoutedEventArgs e)
-        {
-            await ViewModel.SaveNoteAsync();
-            ViewModel.LoadAsync();
-        }
-
         private void TxtboxTitle_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (DataContext != null)
-            { ((dynamic)DataContext).Title = ((TextBox)sender).Text; }
+                ((dynamic)DataContext).Title = ((TextBox)sender).Text;
         }
 
         private void TxtboxContent_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (DataContext != null)
-            { ((dynamic)DataContext).Content = ((TextBox)sender).Text; }
+                ((dynamic)DataContext).Content = ((TextBox)sender).Text;
         }
     }
 }

@@ -15,21 +15,13 @@ namespace Monster.UI.Data
 
         public NoteDataService(Func<AccountContext> contextCreator) => _contextCreator = contextCreator;
 
-        public async Task<List<Note>> GetAllNotesAsync()
+        public async Task<List<Note>> GetAllNotesAsync(int id)
         {
             using (var context = _contextCreator())
             {
-                return await context.Notes.ToListAsync();
+                return await context.Notes.Where(x => x.LoggedInAccountId == id).ToListAsync();
             }
         }
-
-        //public IEnumerable<Note> GetAll()
-        //{
-        //    using (var context = _contextCreator())
-        //    {
-        //        return context.Notes.AsNoTracking().ToList();
-        //    }
-        //}
 
         public async Task SaveNoteAsync(string title, string content)
         {
@@ -41,6 +33,15 @@ namespace Monster.UI.Data
             }
         }
 
+        public async Task DeleteNoteAsync(Note selectedNote)
+        {
+            using(var context = _contextCreator())
+            {
+                context.Notes.Attach(selectedNote);
+                context.Notes.Remove(selectedNote);
+                await context.SaveChangesAsync();
+            }
+        }
 
     }
 }

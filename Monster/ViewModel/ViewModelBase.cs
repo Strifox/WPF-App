@@ -13,16 +13,10 @@ namespace Monster.UI.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        /// <summary>
-        /// Close one window and opens new window
-        /// </summary>
-        ///  <param name="open"> Type in what window to open </paramref>
-        ///  <param name="close">Type in what window to close</param>
         public static void OpenAndCloseWindow(Window open, Window close)
         {
             close.Close();
             open.Show();
         }
-
     }
 }

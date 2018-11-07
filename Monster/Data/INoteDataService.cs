@@ -7,8 +7,8 @@ namespace Monster.UI.Data
 {
     public interface INoteDataService
     {
-        Task<List<Note>> GetAllNotesAsync();
-        //IEnumerable<Note> GetAll();
+        Task<List<Note>> GetAllNotesAsync(int id);
         Task SaveNoteAsync(string title, string content);
+        Task DeleteNoteAsync(Note selectedNote);
     }
 }

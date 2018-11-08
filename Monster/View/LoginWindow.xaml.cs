@@ -1,4 +1,5 @@
-﻿using Monster.DataAccess;
+﻿using MahApps.Metro.Controls;
+using Monster.DataAccess;
 using Monster.Model.Models;
 using Monster.UI.ViewModel;
 using System.Windows;
@@ -9,7 +10,7 @@ namespace Monster.UI.View
     /// <summary>
     /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginWindow : MetroWindow
     {
         private LoginViewModel LoginViewModel = new LoginViewModel();
         private readonly AccountContext context = new AccountContext();
@@ -31,7 +32,7 @@ namespace Monster.UI.View
                 return;
             }
 
-            DetailsViewModel.ShowDetailsWindow();
+            NoteViewModel.ShowDetailsWindow();
             Close();
         }
 

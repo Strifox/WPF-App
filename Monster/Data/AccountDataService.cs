@@ -1,15 +1,26 @@
 ﻿using Monster.DataAccess;
 using Monster.Model.Models;
 using System;
-using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monster.UI.Data
 {
-    public class AccountDataService
+    public class AccountDataService : IAccountDataService
     {
+        private readonly Func<AccountContext> _contextCreator;
+
+        public AccountDataService(Func<AccountContext> contextCreator) => _contextCreator = contextCreator;
+
+        public void UpdateAccount(Account account)
+        {
+            using(var context = _contextCreator())
+            {
+                context.Accounts.AddOrUpdate(account);
+                context.SaveChanges();
+            }
+        }
+        
         public static bool DoesPlayerExistWithName(AccountContext context, string name)
         {
             var accounts = from account in context.Accounts

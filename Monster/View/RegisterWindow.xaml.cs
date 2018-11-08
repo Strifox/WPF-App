@@ -1,4 +1,5 @@
-﻿using Monster.Model.Models;
+﻿using MahApps.Metro.Controls;
+using Monster.Model.Models;
 using Monster.UI.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,7 +9,7 @@ namespace Monster.UI.View
     /// <summary>
     /// Interaction logic for RegisterWindow.xaml
     /// </summary>
-    public partial class RegisterWindow : Window
+    public partial class RegisterWindow : MetroWindow
     {
         private RegisterViewModel model = new RegisterViewModel();
 

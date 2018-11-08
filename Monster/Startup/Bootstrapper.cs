@@ -3,6 +3,7 @@ using Monster.DataAccess;
 using Monster.UI.Data;
 using Monster.UI.View;
 using Monster.UI.ViewModel;
+using System.Windows;
 
 namespace Monster.UI.Startup
 {
@@ -15,8 +16,13 @@ namespace Monster.UI.Startup
 
             builder.RegisterType<AccountContext>().AsSelf();
 
-            builder.RegisterType<DetailsViewModel>().AsSelf();
-            builder.RegisterType<DetailsWindow>().AsSelf();
+            builder.RegisterType<NoteViewModel>().AsSelf();
+            builder.RegisterType<NoteWindow>().AsSelf();
+
+            builder.RegisterType<AccountViewModel>().AsSelf();
+            builder.RegisterType<AccountWindow>().AsSelf();
+
+            builder.RegisterType<AccountDataService>().As<IAccountDataService>();
             builder.RegisterType<NoteDataService>().As<INoteDataService>();
 
             return builder.Build();

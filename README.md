@@ -1,1 +1,1 @@
-DailyStuff
+WPF App with Login
